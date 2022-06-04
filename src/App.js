@@ -1,57 +1,59 @@
-import { useEffect, useRef, useState } from 'react';
-import './App.css';
-import ImageGrallery from './ImageGrallery';
+import { useEffect, useRef, useState } from "react";
+import "./App.css";
+import ImageGrallery from "./ImageGrallery";
 
-const API_KEY = "27800439-c51423717090186532fd42957"
-const URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+ 'mountain';
+const API_KEY = "27800439-c51423717090186532fd42957";
 
 function App() {
-  const [inputText, setInputText] = useState("")
-  const [fetchData, setFetchData] = useState([])
-  const [isLoading, setIsLoading] = useState(false);
+  const [inputText, setInputText] = useState("");
+  const [fetchData, setFetchData] = useState([]);
+
   const ref = useRef();
+  const URL = "https://pixabay.com/api/?key=" + API_KEY + "&q=" + `apple`;
+
+  // console.log(ref.current.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    console.log(ref.current.value);
+    const searchURL =
+      "https://pixabay.com/api/?key=" + API_KEY + "&q=" + ref.current.value;
+
     //fetch data
-    try {
-      const res = await fetch(URL);
-      if(!res.ok) {
-        throw new Error(`Error! status: ${res.status}`);
-      }
-
-      const jsonData = await res.json();
-      console.log(jsonData)
-      setFetchData(jsonData);
-    } catch (e) {
-        return console.log(e);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
-  //useEffect追加して確かめよう
-  useEffect(() => {
-    fetch(URL)
+    fetch(searchURL)
       .then((res) => {
         return res.json();
       })
-      .then((data) => setFetchData(data));
-  }, []);
+      .then((data) => {
+        setFetchData(data.hits);
+      });
+  };
 
-  // console.log(fetchData.hits[0].id)
+  // useEffect追加して確かめよう;
+  // useEffect(() => {
+  //   fetch(URL)
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data) => {
+  //       console.log(data.hits); //これは配列。配列の中にオブジェクトがある。
+  //       setFetchData(data.hits);
+  //     });
+  // }, []);
+
+  //リロードするとなくなる⇨エラーになる。
+  // console.log(fetchData.hits[0].id);
 
   // console.log(fetchData.hits[0].id) //1回目はとれてるのか
 
   return (
     <div>
-      <div className='container'>
+      <div className="container">
         <h2>My Pixabay</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
-          <input type="text" placeholder='画像を探す' ref={ref} onChange={(e) => setInputText(e.target.value)}/>
+          <input type="text" placeholder="画像を探す" ref={ref} />
         </form>
-        <ImageGrallery fetchData={fetchData} isLoading={isLoading}/>
+        <ImageGrallery fetchData={fetchData} />
       </div>
     </div>
   );
