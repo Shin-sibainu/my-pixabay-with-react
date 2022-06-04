@@ -1,13 +1,16 @@
 import React from "react";
 import "./ImageGrallery.css";
 
-const ImageGrallery = ({ fetchData, isLoading }) => {
+const ImageGrallery = ({ fetchData }) => {
   return (
     <div>
       <div className="images-wrapper">
+        {/* 配列じゃないとmap使えない。オブジェクトだとmapは使えないからエラーになる。 */}
         {fetchData.map((data) => (
           <div className="image" key={data.id}>
-            <img src={data.largeImageURL} alt="" />
+            <a href={data.pageURL} target="_blank">
+              <img src={data.largeImageURL} alt="" />
+            </a>
           </div>
         ))}
 

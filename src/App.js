@@ -30,16 +30,16 @@ function App() {
   };
 
   // useEffect追加して確かめよう;
-  // useEffect(() => {
-  //   fetch(URL)
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       console.log(data.hits); //これは配列。配列の中にオブジェクトがある。
-  //       setFetchData(data.hits);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch(URL)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data.hits); //これは配列。配列の中にオブジェクトがある。
+        setFetchData(data.hits);
+      });
+  }, []);
 
   //リロードするとなくなる⇨エラーになる。
   // console.log(fetchData.hits[0].id);
