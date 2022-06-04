@@ -1,18 +1,25 @@
 import React from 'react'
 import "./ImageGrallery.css"
 
-const API_KEY = "27800439-c51423717090186532fd42957"
-const URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+ 'red roses';
+const ImageGrallery = ({fetchData, isLoading}) => {
 
-const ImageGrallery = () => {
   return (
     <div>
         <div className="images-wrapper">
-            <div className="image box01">
-                <img src="https://pixabay.com/get/g05596d3b2fe5e1743eb207bb064857e4a042747df2bb4a8fa37724c6ce90cb34d86749b59353f41e90c02822b9c228bd1fe026cff797ff68919a7dc604fd99ba_1280.jpg" alt="" />
+        {/* {isLoading && <h2>Loading...</h2>} */}
+            {/* {fetchData.map(data => (<>
+                <div className="image" key={data.id}>
+                    <img src="https://pixabay.com/get/g4ab2fae6965d2ed0bd512bbf91199a482bf0276c729c9b2ea6a4c99b29f7c656c3e4d07e601f63b0c1871fcd627552cac8de883565500b9ff760d9618c1e886f_1280.png" alt="" />
+                </div>
+            </>))} */}
+
+            {/* {fetchData.hits[0].id}  */}
+
+            {/* <div className="image box01">
+                <img src="https://pixabay.com/get/g4ab2fae6965d2ed0bd512bbf91199a482bf0276c729c9b2ea6a4c99b29f7c656c3e4d07e601f63b0c1871fcd627552cac8de883565500b9ff760d9618c1e886f_1280.png" alt="" />
             </div>
             <div className="image box02">
-                image-2
+                <img src="https://pixabay.com/get/g01015af8f72cf76e3d864b339a08520a5ce05f2619765121208d5f884f486bbbef612987c2b02ae6f9a7990afcc77706f29c4bb960f1f38ccf2a4b31a0983bea_1280.jpg" alt="" />
             </div>
             <div className="image box02">
                 image-3
@@ -22,7 +29,7 @@ const ImageGrallery = () => {
             </div>
             <div className="image box02">
                 image-5
-            </div>
+            </div> */}
         </div>
     </div>
   )
